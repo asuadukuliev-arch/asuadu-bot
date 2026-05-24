@@ -43,7 +43,6 @@ model = genai.GenerativeModel(
 - Пиши на русском языке"""
 )
 
-# История диалогов
 conversations = {}
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -62,7 +61,6 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         await update.message.reply_text(reply)
 
-        # Уведомляем владельца если это новая запись
         if "НОВАЯ ЗАПИСЬ:" in reply and OWNER_CHAT_ID:
             now = datetime.now().strftime("%d.%m.%Y %H:%M")
             owner_msg = f"🐴 *Новая запись!*\n\n👤 Клиент: {user_name} (ID: {user_id})\n🕐 {now}\n\n{reply}"
@@ -73,8 +71,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
 
     except Exception as e:
-    logger.error(f"Ошибка Gemini: {type(e).__name__}: {e}")
-
+        logger.error(f"Ошибка Gemini: {type(e).__name__}: {e}")
         await update.message.reply_text(
             "Извините, произошла ошибка. Свяжитесь с нами напрямую: https://t.me/asuadu1"
         )
