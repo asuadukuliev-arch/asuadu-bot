@@ -73,7 +73,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
 
     except Exception as e:
-        logger.error(f"Ошибка: {e}")
+    logger.error(f"Ошибка Gemini: {type(e).__name__}: {e}")
+
         await update.message.reply_text(
             "Извините, произошла ошибка. Свяжитесь с нами напрямую: https://t.me/asuadu1"
         )
